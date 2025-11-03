@@ -5,4 +5,6 @@ pragma solidity ^0.8.19;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-contract BasicNft is ERC721{}
+contract BasicNft is ERC721{
+    constructor() ERC721("Cypherpulse", "CYPHER"){}
+    }
