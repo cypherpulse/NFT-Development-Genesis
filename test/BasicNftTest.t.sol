@@ -9,4 +9,8 @@ import {BasicNft} from "../src/BasicNft.sol";
 contract BasicNftTest is Test{
     DeployBasicNft public deployer;
     BasicNft public basicNft;
+
+    function setUp() public{
+        
+    }
 }
