@@ -11,6 +11,6 @@ contract BasicNftTest is Test{
     BasicNft public basicNft;
 
     function setUp() public{
-        
+        deployer = new DeployBasicNft();
     }
 }
