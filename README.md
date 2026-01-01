@@ -98,6 +98,96 @@ forge --version
 
 - `BasicNft.sol`: Core ERC-721 NFT contract with minting functionality.
 
+### Deployment Scripts
+
+- `deploy-sepolia.sh`: Deploys the contract to Base Sepolia testnet.
+- `mint-sepolia.sh`: Mints an NFT on the deployed contract.
+
+Run the scripts:
+
+```bash
+./deploy-sepolia.sh  # Deploys the contract
+./mint-sepolia.sh    # Mints an NFT
+```
+
+Or use the Makefile:
+
+```bash
+make deploy ARGS="--network base-sepolia"
+make Mint ARGS="--network base-sepolia"
+```
+
+## 🧪 Testing
+
+Run the comprehensive test suite:
+
+```bash
+forge test
+```
+
+Run tests with gas reporting:
+
+```bash
+forge test --gas-report
+```
+
+Run specific tests:
+
+```bash
+forge test --match-path test/BasicNftTest.t.sol
+```
+
+### Test Coverage
+
+- `testNameIsCorrect`: Verifies the contract name is "Cypherpulse".
+- `testCanMintAndHaveBalance`: Tests minting functionality, balance, and token URI retrieval.
+
+## 🚀 Deployment
+
+### Live Deployment on Base Sepolia
+
+The contract has been successfully deployed and tested on Base Sepolia:
+
+- **Contract Address**: `0xBaAa6adfcEc14E8ebCD4abBb9cfc8C77367aA57e`
+- **Basescan Contract Page**: [View on Basescan](https://sepolia.basescan.org/address/0xbaaa6adfcec14e8ebcd4abbb9cfc8c77367aa57e)
+- **Deployment Transaction**: [View Transaction](https://sepolia.basescan.org/tx/0xc1271d29c6c4e8769edca1cbf6da565018a60b3ac4c3ba49f227f296ca05cf2f)
+- **Minted NFT Transaction**: [View Transaction](https://sepolia.basescan.org/tx/0xd2d94e8c5d55f2e45cde6a7840d5dca56ba6ded17170d904d7167438d471937b)
+- **Minted Token ID**: 0
+- **Token URI**: `ipfs://bafybeig37ioir76s7mg5oobetncojcm3c3hxasyd4rvid4jqhy4gkaheg4/?filename=0-PUG.json`
+
+### Deploy to Other Networks
+
+Deploy to a testnet or mainnet:
+
+1. Set up your environment variables (create a `.env` file):
+
+   ```bash
+   PRIVATE_KEY=your_private_key_here
+   RPC_URL=https://your-rpc-url-here
+   ETHERSCAN_API_KEY=your_api_key_here
+   ```
+
+2. Deploy using the script:
+
+   ```bash
+   forge script script/DeployBasicNft.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --verify
+   ```
+
+   Note: Add `--verify` for contract verification on Etherscan/Basescan.
+
+### Token ID Assignment
+
+Token IDs are assigned sequentially starting from 0:
+- First minted NFT: Token ID 0
+- Second minted NFT: Token ID 1
+- And so on...
+
+You can retrieve token information using:
+```bash
+cast call <contract_address> "tokenURI(uint256)" <token_id> --rpc-url $RPC_URL
+cast call <contract_address> "ownerOf(uint256)" <token_id> --rpc-url $RPC_URL
+```
+
 ## 🧪 Testing
 
 Run the comprehensive test suite:
