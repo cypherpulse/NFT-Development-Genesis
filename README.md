@@ -8,28 +8,29 @@
 
 A comprehensive toolkit for developing, testing, and deploying ERC-721 NFTs on Ethereum using Foundry. This project serves as a genesis for NFT development, providing robust smart contracts, thorough testing, and deployment scripts to kickstart your Web3 journey.
 
-## 🚀 Features
-
-- **ERC-721 Compliant**: Fully compliant with the ERC-721 standard for non-fungible tokens.
-- **Gas Optimized**: Efficient smart contracts designed for minimal gas usage.
-- **Comprehensive Testing**: Extensive test suite using Foundry's Forge for reliability.
-- **Deployment Scripts**: Ready-to-use scripts for deploying to various networks.
-- **Modular Architecture**: Easily extensible for custom NFT features.
-- **Security Audited**: Built with security best practices and OpenZeppelin standards.
 
 ## 📋 Table of Contents
 
 - [NFT Development Genesis](#nft-development-genesis)
-  - [🚀 Features](#-features)
   - [📋 Table of Contents](#-table-of-contents)
   - [🔧 Prerequisites](#-prerequisites)
   - [📦 Installation](#-installation)
   - [💻 Usage](#-usage)
     - [Development Workflow](#development-workflow)
     - [Key Contracts](#key-contracts)
+    - [Deployment Scripts](#deployment-scripts)
   - [🧪 Testing](#-testing)
+    - [Test Coverage](#test-coverage)
   - [🚀 Deployment](#-deployment)
-  - [🤝 Contributing](#-contributing)
+    - [Live Deployment on Base Sepolia](#live-deployment-on-base-sepolia)
+    - [Deploy to Other Networks](#deploy-to-other-networks)
+    - [Token ID Assignment](#token-id-assignment)
+  - [🎨 SVG Creation and NFT Artwork](#-svg-creation-and-nft-artwork)
+    - [What is SVG?](#what-is-svg)
+    - [Creating SVG Artwork](#creating-svg-artwork)
+    - [Example: Happy Face SVG](#example-happy-face-svg)
+    - [Using SVG in NFTs](#using-svg-in-nfts)
+  - [Contributing](#contributing)
     - [Development Process](#development-process)
     - [Guidelines](#guidelines)
     - [Code of Conduct](#code-of-conduct)
@@ -187,47 +188,47 @@ You can retrieve token information using:
 cast call <contract_address> "tokenURI(uint256)" <token_id> --rpc-url $RPC_URL
 cast call <contract_address> "ownerOf(uint256)" <token_id> --rpc-url $RPC_URL
 ```
+## 🎨 SVG Creation and NFT Artwork
 
-## 🧪 Testing
+### What is SVG?
+SVG (Scalable Vector Graphics) is an XML-based vector image format for two-dimensional graphics. It's perfect for NFTs because:
+- **Scalable**: Looks crisp at any size without pixelation
+- **Lightweight**: Small file sizes compared to raster images
+- **On-chain friendly**: Can be stored directly in smart contracts
+- **Customizable**: Easily modifiable with code
 
-Run the comprehensive test suite:
+### Creating SVG Artwork
+You can create SVG graphics using:
+- **Code editors**: Write raw SVG markup
+- **Design tools**: Adobe Illustrator, Inkscape (export to SVG)
+- **Online editors**: SVG-edit, Boxy SVG
+- **Programming**: Generate dynamically with JavaScript/Solidity
 
-```bash
-forge test
+### Example: Happy Face SVG
+Here's a simple happy face SVG created for this project:
+
+```svg
+<svg viewBox="0 0 200 200" width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" fill="greenyellow" r="78" stroke="black" stroke-width="3" />
+  <g class="eyes">
+    <circle cx="61" cy="82" r="12" />
+    <circle cx="127" cy="82" r="12" />
+  </g>
+  <path d="m136.81 116.53c.69 26.17-64.11 42-81.52-.73" style="fill:none; stroke: black; stroke-width: 3;" />
+</svg>
 ```
 
-Run tests with gas reporting:
+**Rendered Image:**
+<img src="data:image/svg+xml;base64,PHN2Zw0KICB2aWV3Qm94PSIwIDAgMjAwIDIwMCINCiAgd2lkdGg9IjQwMCINCiAgaGVpZ2h0PSI0MDAiDQogIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyINCj4NCiAgPGNpcmNsZQ0KICAgIGN4PSIxMDAiDQogICAgY3k9IjEwMCINCiAgICBmaWxsPSJncmVlbnllbGxvdyINCiAgICByPSI3OCINCiAgICBzdHJva2U9ImJsYWNrIg0KICAgIHN0cm9rZS13aWR0aD0iMyINCiAgLz4NCiAgPGcgY2xhc3M9ImV5ZXMiPg0KICAgIDxjaXJjbGUgY3g9IjYxIiBjeT0iODIiIHI9IjEyIiAvPg0KICAgIDxjaXJjbGUgY3g9IjEyNyIgY3k9IjgyIiByPSIxMiIgLz4NCiAgPC9nPg0KICA8cGF0aA0KICAgIGQ9Im0xMzYuODEgMTE2LjUzYy42OSAyNi4xNy02NC4xMSA0Mi04MS41Mi0uNzMiDQogICAgc3R5bGU9ImZpbGw6bm9uZTsgc3Ryb2tlOiBibGFjazsgc3Ryb2tlLXdpZHRoOiAzOyINCiAgLz4NCjwvc3ZnPg==" alt="Happy Face SVG" width="200" height="200" />
 
-```bash
-forge test --gas-report
-```
+### Using SVG in NFTs
+To use SVG in your NFTs:
+1. **Encode to Base64**: Convert SVG to base64 for on-chain storage
+2. **Create tokenURI**: Return `data:image/svg+xml;base64,<encoded_svg>` from `tokenURI()`
+3. **Store on IPFS**: Upload SVG to IPFS for off-chain storage (as done in this project)
 
-Run specific tests:
-
-```bash
-forge test --match-path test/BasicNftTest.t.sol
-```
-
-## 🚀 Deployment
-
-Deploy to a testnet or mainnet:
-
-1. Set up your environment variables (create a `.env` file):
-
-   ```bash
-   PRIVATE_KEY=your_private_key_here
-   RPC_URL=https://your-rpc-url-here
-   ```
-
-2. Deploy using the script:
-
-   ```bash
-   forge script script/DeployBasicNft.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --verify
-   ```
-
-   Note: Add `--verify` for contract verification on Etherscan.
-
-## 🤝 Contributing
+The minted NFT in this project uses an IPFS-hosted SVG as its metadata.
+##  Contributing
 
 We welcome contributions from the community! Here's how you can get involved:
 
