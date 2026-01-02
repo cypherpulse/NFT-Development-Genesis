@@ -46,5 +46,5 @@ contract MoodNft is ERC721{
         s_tokenCounter = s_tokenCounter + 1;
     }
 
-    function tokenURI()
+    function tokenURI(uint256 tokenID)
 }
