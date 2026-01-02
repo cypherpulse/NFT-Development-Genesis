@@ -30,5 +30,5 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 
 contract MoodNft is ERC721{
-    constructor() ERC721("Mood NFT", "MN"){}
+    constructor(string memory sadSVG, string memory happySvg) ERC721("Mood NFT", "MN"){}
 }
