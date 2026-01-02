@@ -30,5 +30,19 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 
 contract MoodNft is ERC721{
-    constructor(string memory sadSVG, string memory happySvg) ERC721("Mood NFT", "MN"){}
+    string private s_sadSVG;
+    string private s_happySvg;
+    uint256 private s_tokenCounter;
+
+    constructor(string memory sadSVG, string memory happySvg) ERC721("Mood NFT", "MN"){
+        s_tokenCounter = 0;
+        s_sadSVG = sadSVG;
+        s_happySvg = happySvg;
+    }
+
+    function mintNFT() public {
+        _safeMint(msg.sender,s_tokenCounter);
+        // can be written as s_tokenCounter += 1; or s_tokenCounter++;
+        s_tokenCounter = s_tokenCounter + 1;
+    }
 }
