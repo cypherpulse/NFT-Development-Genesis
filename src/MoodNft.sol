@@ -2,4 +2,9 @@
 
 pragma solidity ^0.8.18;
 
-contract MoodNft{}
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+
+
+contract MoodNft{
+    
+}
