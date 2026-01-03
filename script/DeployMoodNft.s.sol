@@ -12,5 +12,6 @@ contract DeployMoodNft is Script {
 
     function svgToImageURI(string memory svg) public pure returns (string memory ){
         string memory baseURL = "data:image/svg+xml;base64,";
+        string 
     }
 }
